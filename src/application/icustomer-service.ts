@@ -1,5 +1,5 @@
 import { Customer } from './entity/customer'
 
 export interface ICustomerService {
-  create: (customer: Customer) => Promise<Customer>
+  create: (id: string, name: string) => Promise<Customer>
 }

@@ -27,9 +27,14 @@ const makeSut = (): SutTypes => {
 describe('customer service', () => {
   it('should create new customer', async () => {
     const { sut } = makeSut()
-    const customer = new Customer('123', 'John')
-    const result = await sut.create(customer)
+    const result = await sut.create('123', 'John')
     expect(result.name).toBe('John')
+  })
+
+  it('should throw new error, if customer invalid', async () => {
+    const { sut, customerRepository } = makeSut()
+    const promise = sut.create('', 'John')
+    await expect(promise).rejects.toThrowError('id is required')
   })
 
   it('should throw new error', async () => {
@@ -37,8 +42,7 @@ describe('customer service', () => {
     jest.spyOn(customerRepository, 'create').mockImplementation(async () => {
       throw new Error('any error')
     })
-    const customer = new Customer('123', 'John')
-    const promise = sut.create(customer)
+    const promise = sut.create('123', 'John')
     await expect(promise).rejects.toThrowError('any error')
   })
 })

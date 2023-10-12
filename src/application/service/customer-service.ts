@@ -9,7 +9,8 @@ export class CustomerService implements ICustomerService {
     this._customerRepository = customerRepository
   }
 
-  async create (customer: Customer): Promise<Customer> {
+  async create (id: string, name: string): Promise<Customer> {
+    const customer = new Customer(id, name)
     return await this._customerRepository.create(customer)
   }
 }
