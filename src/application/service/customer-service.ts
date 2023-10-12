@@ -1,13 +1,15 @@
-import { Customer } from '../application/entity/customer'
-
-export interface ICustomerService {
-  create: (customer: Customer) => Customer
-}
+import { ICustomerRepository } from '../icustomer-repository'
+import { ICustomerService } from '../icustomer-service'
+import { Customer } from '../entity/customer'
 
 export class CustomerService implements ICustomerService {
-  constructor () {
+  private readonly _customerRepository: ICustomerRepository
 
+  constructor (customerRepository: ICustomerRepository) {
+    this._customerRepository = customerRepository
   }
 
-  create (customer: Customer): Customer {}
+  async create (customer: Customer): Promise<Customer> {
+    return await this._customerRepository.create(customer)
+  }
 }

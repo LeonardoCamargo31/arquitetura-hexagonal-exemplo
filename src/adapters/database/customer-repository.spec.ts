@@ -1,4 +1,4 @@
-import { ICustomerRepository } from '../../application/Icustomer-repository'
+import { ICustomerRepository } from '../../application/icustomer-repository'
 import { Customer } from '../../application/entity/customer'
 import { CustomerRepository } from './customer-repository'
 import { MongoHelper } from './mongo-helper'
